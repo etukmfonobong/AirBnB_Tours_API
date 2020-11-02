@@ -8,6 +8,7 @@ const xss = require('xss-clean')
 const hpp = require('hpp')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const compression = require('compression')
 
 
 const tourRouter = require('./routes/tourRoutes') //tour router import
@@ -58,6 +59,9 @@ app.use(xss())
 app.use(hpp({
   whitelist: ['duration', 'ratingsAverage', 'ratingsQuantity', 'difficulty', 'maxGroupSize', 'price']
 }))
+
+//compress all text responses
+app.use(compression())
 
 //serving static files
 // app.use(express.static(`${__dirname}/public`))
