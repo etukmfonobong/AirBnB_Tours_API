@@ -61,7 +61,7 @@ exports.logIn = async (req, res, next) => {
 
   } catch (e) {
     //create an error message if an error occurs
-    return next
+    return next(e)
   }
 
 }

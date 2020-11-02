@@ -60,6 +60,10 @@ const errorHandler = (err, req, res, next) => {
     if (err.name === 'JsonWebTokenError') {
       error = helper.handleJsonWebTokenExpiredJWT()
     }
+    //handle unauthorized 401 error
+    if (err.statusCode === 401) {
+      error = err
+    }
 
     sendProductionError(error, res)
   }
