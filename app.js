@@ -31,7 +31,7 @@ app.use(cookieParser())
 //allow cross site resource sharing from specified domains
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:8080', 'http://192.168.8.120:8080'],
+  origin: ['http://localhost:8080', 'http://192.168.8.120:8080', 'https://airbnb-tours-etukmfon.herokuapp.com'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }))
 
