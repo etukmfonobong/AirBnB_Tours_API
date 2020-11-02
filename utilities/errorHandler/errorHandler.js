@@ -64,6 +64,10 @@ const errorHandler = (err, req, res, next) => {
     if (err.statusCode === 401) {
       error = err
     }
+    //handle resource not found 404
+    if (err.statusCode === 404) {
+      error = err
+    }
 
     sendProductionError(error, res)
   }
