@@ -23,11 +23,6 @@ const app = express()
 //template engine
 app.set('view engine', 'pug')
 
-//allow secure cookies on heroku
-if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1)
-}
-
 //global middlewares
 //parse cookies
 app.use(cookieParser())
