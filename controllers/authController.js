@@ -75,14 +75,15 @@ exports.secureToken = async (req, res, next) => {
     const headerToken = split[0].concat('.', split[1])
     const signature = split[2]
 
-    const sameSite = process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    // const sameSite = process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    const sameSite = "lax"
 
     const farFuture = new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10)
     //send two separate cookies with the signature cookie set to http only
     res.cookie('jwtsig', signature, {
       expires: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: 'airbnb-tours-etukmfon.herokuapp.com',
+      domain: '.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
       path: '/',
       sameSite: sameSite,
@@ -92,7 +93,7 @@ exports.secureToken = async (req, res, next) => {
     res.cookie('jwthandp', headerToken, {
       expires: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: 'airbnb-tours-etukmfon.herokuapp.com',
+      domain: '.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
       path: '/',
       sameSite: sameSite,
