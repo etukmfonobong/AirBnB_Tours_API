@@ -4,16 +4,32 @@ const dotenv = require('dotenv')
 dotenv.config({path: path.join(__dirname + '/../config.env')})
 
 
-//connect to database
 const mongoose = require('mongoose')
-mongoose.connect(process.env.DATABASE_ATLAS, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-}).then(() => {
-  console.log('DB connection successful')
-})
+//connect to database local
+if (process.env.NODE_ENV === 'development') {
+  mongoose.connect(process.env.DATABASE_LOCAL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  }).then(() => {
+    console.log('DB connection successful')
+  })
+}
+
+//connect to database atlas
+if (process.env.NODE_ENV === 'production') {
+  mongoose.connect(process.env.DATABASE_ATLAS, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  }).then(() => {
+    console.log('DB connection successful')
+  })
+}
 
 //import Models
 const Tour = require('./../models/tourModel')
