@@ -77,7 +77,7 @@ exports.secureToken = async (req, res, next) => {
 
     const farFuture = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 365 * 10))
     //send two separate cookies with the signature cookie set to http only
-    res.cookie('jwtsig', signature, {
+    await res.cookie('jwtsig', signature, {
       expiresIn: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
       domain: '.airbnb-tours-etukmfon.herokuapp.com',
@@ -86,7 +86,7 @@ exports.secureToken = async (req, res, next) => {
       httpOnly: true
     })
 
-    res.cookie('jwthandp', headerToken, {
+    await res.cookie('jwthandp', headerToken, {
       expiresIn: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
       domain: '.airbnb-tours-etukmfon.herokuapp.com',
