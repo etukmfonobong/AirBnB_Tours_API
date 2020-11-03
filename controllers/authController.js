@@ -51,9 +51,10 @@ exports.logIn = async (req, res, next) => {
     //check if user exists
     const user = await User.findOne({email}).select('+password')
 
-    console.log(req.get('host'))
-    console.log(res)
-    console.log(res.request)
+    console.log(req.get('origin'))
+    console.log(req.headers["x-forwarded-for"])
+    console.log(req.connection.remoteAddress)
+    console.log(res.headers)
 
     if (!user || !await user.verifyPassword(password, user.password)) {
       return next(new customError('Invalid email or password', 401))
