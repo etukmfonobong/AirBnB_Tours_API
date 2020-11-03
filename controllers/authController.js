@@ -84,6 +84,7 @@ exports.secureToken = async (req, res, next) => {
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
       domain: 'airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
+      path: '/',
       sameSite: sameSite,
       httpOnly: true
     })
@@ -93,6 +94,7 @@ exports.secureToken = async (req, res, next) => {
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
       domain: 'airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
+      path: '/',
       sameSite: sameSite,
     })
 
