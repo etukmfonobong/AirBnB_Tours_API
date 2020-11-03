@@ -75,24 +75,29 @@ exports.secureToken = async (req, res, next) => {
     const headerToken = split[0].concat('.', split[1])
     const signature = split[2]
 
-    const farFuture = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 365 * 10))
+    const sameSite = process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+
+    const farFuture = new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10)
     //send two separate cookies with the signature cookie set to http only
-    await res.cookie('jwtsig', signature, {
-      expiresIn: farFuture,
+    res.cookie('jwtsig', signature, {
+      expires: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: '.airbnb-tours-etukmfon.herokuapp.com',
+      // domain: '.airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'none',
+      sameSite: sameSite,
       httpOnly: true
     })
 
-    await res.cookie('jwthandp', headerToken, {
-      expiresIn: farFuture,
+    res.cookie('jwthandp', headerToken, {
+      expires: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: '.airbnb-tours-etukmfon.herokuapp.com',
+      // domain: '.airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'none',
+      sameSite: sameSite,
     })
+
+    res.cookie('testcookie', 'testvalue')
+
 
     if (req["newUser"]) {
       //if successful send back response with new user object

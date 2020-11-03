@@ -31,8 +31,10 @@ app.use(cookieParser())
 app.use(cors({
   credentials: true,
   origin: ['http://localhost:8080', 'http://192.168.8.120:8080', 'https://airbnb-tours-etukmfon.herokuapp.com'],
+  exposedHeaders: ["set-cookie"],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }))
+app.options('*', cors())
 
 
 //set http security headers
