@@ -80,7 +80,7 @@ exports.secureToken = async (req, res, next) => {
     res.cookie('jwtsig', signature, {
       expiresIn: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: 'airbnb-tours-etukmfon.herokuapp.com',
+      domain: '.airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'none',
       httpOnly: true
@@ -89,7 +89,7 @@ exports.secureToken = async (req, res, next) => {
     res.cookie('jwthandp', headerToken, {
       expiresIn: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: 'airbnb-tours-etukmfon.herokuapp.com',
+      domain: '.airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'none',
     })
