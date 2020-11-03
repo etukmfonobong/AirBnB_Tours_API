@@ -78,7 +78,7 @@ exports.secureToken = async (req, res, next) => {
     //send two separate cookies with the signature cookie set to http only
     res.cookie('jwtsig', signature, {
       expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: 'herokuapp.com',
+      domain: 'airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'none',
       httpOnly: true
@@ -86,7 +86,7 @@ exports.secureToken = async (req, res, next) => {
 
     res.cookie('jwthandp', headerToken, {
       expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: 'herokuapp.com',
+      domain: 'airbnb-tours-etukmfon.herokuapp.com',
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'none',
     })
