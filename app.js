@@ -20,6 +20,8 @@ const express = require('express')
 const path = require('path')
 const app = express()
 
+app.enable('trust proxy')
+
 //template engine
 app.set('view engine', 'pug')
 
