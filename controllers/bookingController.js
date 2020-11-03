@@ -8,13 +8,12 @@ exports.getCheckoutSesssion = async (req, res, next) => {
     //get tour to be booked from db
     const tour = await Tour.findById(req.params["tourId"])
 
-    console.log(req.get('origin'))
     //create a stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       customer_email: req.user.email,
-      success_url: `https://${req.get('origin')}/home`,
-      cancel_url: `https://${req.get('origin')}/tour/${tour._id}`,
+      success_url: `${req.get('origin')}/home`,
+      cancel_url: `${req.get('origin')}/tour/${tour._id}`,
       client_reference_id: req.params['tourId'],
       line_items: [
         {
@@ -28,7 +27,7 @@ exports.getCheckoutSesssion = async (req, res, next) => {
         }
       ]
     })
-    console.log(req)
+
     //send session as response
     await res.status(200).json({
       status: 'success',
