@@ -52,8 +52,8 @@ exports.logIn = async (req, res, next) => {
     const user = await User.findOne({email}).select('+password')
 
     console.log(req.get('host'))
-    console.log(req.headers.host)
-    console.log(req.headers.hostname)
+    console.log(req.originalUrl)
+    console.log(req.url)
 
     if (!user || !await user.verifyPassword(password, user.password)) {
       return next(new customError('Invalid email or password', 401))
