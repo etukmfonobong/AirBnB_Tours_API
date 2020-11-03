@@ -8,7 +8,7 @@ exports.getCheckoutSesssion = async (req, res, next) => {
     //get tour to be booked from db
     const tour = await Tour.findById(req.params["tourId"])
 
-    console.log(req)
+    console.log(req.get('origin'))
     //create a stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
