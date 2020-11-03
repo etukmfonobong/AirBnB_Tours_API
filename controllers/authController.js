@@ -83,7 +83,6 @@ exports.secureToken = async (req, res, next) => {
     res.cookie('jwtsig', signature, {
       expires: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: '.herokuapp.com',
       secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
       path: '/',
       sameSite: sameSite,
@@ -93,7 +92,6 @@ exports.secureToken = async (req, res, next) => {
     res.cookie('jwthandp', headerToken, {
       expires: farFuture,
       // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      domain: '.herokuapp.com',
       secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
       path: '/',
       sameSite: sameSite,
