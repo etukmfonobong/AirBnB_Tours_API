@@ -8,7 +8,7 @@ router
   .route('/checkout-session/:tourId')
   .get(authController.createBearerToken, authController.protect, bookingController.getCheckoutSession)
 
-router.route('/create-booking')
-  .post(express.raw(), bookingController.createBookingFromWebhook)
+// router.route('/create-booking')
+//   .post(express.raw(), bookingController.createBookingFromWebhook)
 
 module.exports = router

@@ -15,6 +15,7 @@ const tourRouter = require('./routes/tourRoutes') //tour router import
 const userRouter = require('./routes/userRoutes') //user router import
 const reviewRouter = require('./routes/reviewRoutes') //review router import
 const bookingRouter = require('./routes/bookingRoutes') //booking router import
+const bookingController = require('./controllers/bookingController')
 
 const express = require('express')
 const path = require('path')
@@ -51,7 +52,7 @@ const limiter = rateLimit({
 app.use('/api', limiter)
 
 //Stripe webhook - needs to come before json body parser
-app.use('/webhook-checkout', bookingRouter)
+app.post('/webhook-checkout/create-booking', express.raw(), bookingController.createBookingFromWebhook)
 
 //body parser
 app.use(express.json({limit: '10kb'})) //add body to the request object
