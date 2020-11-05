@@ -74,8 +74,9 @@ exports.createBookingFromWebhook = async (req, res, next) => {
     await res.status(200).json({received: true})
 
   } catch (e) {
+    console.log(e)
     //if (error) send e.message back to stripe
-    return res.status(400).send(`webhook error ${e.message}`)
+    return await res.status(400).send(`webhook error ${e.message}`)
   }
 }
 
