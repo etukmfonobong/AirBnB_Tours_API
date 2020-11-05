@@ -66,7 +66,7 @@ exports.createBookingFromWebhook = async (req, res, next) => {
     const signature = req.headers['stripe-signature']
     //create an event
     const event = stripe.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET)
-
+    console.log(signature, event)
     if (event.type === 'checkout.session.completed') {
       await createBooking(event.data.object)
     }
