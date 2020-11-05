@@ -1,8 +1,8 @@
-const reviewSchema = require('./../reviewSchema')
+const bookingSchema = require('./../bookingSchema')
 
-//on query populate review with user info
+//on query populate booking with user and tour info
 exports.populateFields = () => {
-  return reviewSchema.pre(/^find/, function (next) {
+  return bookingSchema.pre(/^find/, function (next) {
     this.populate({
       path: 'user'
     }).populate({

@@ -6,7 +6,9 @@ const bookingController = require('./../controllers/bookingController') //bookin
 
 router
   .route('/checkout-session/:tourId')
-  .get(authController.createBearerToken, authController.protect, bookingController.getCheckoutSesssion)
+  .get(authController.createBearerToken, authController.protect, bookingController.getCheckoutSession)
 
+router.route('/create-booking')
+  .post(express.raw({type: 'application/json'}), bookingController.createBookingFromWebhook)
 
 module.exports = router

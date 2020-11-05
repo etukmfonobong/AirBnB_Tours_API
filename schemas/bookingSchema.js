@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const userSchema = require('./userSchema')
 const tourSchema = require('./tourSchema')
 
-// const slugify = require('slugify')
 module.exports = bookingSchema = new mongoose.Schema({
   paid: {
     type: Boolean,

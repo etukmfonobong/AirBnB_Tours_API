@@ -50,6 +50,9 @@ const limiter = rateLimit({
 })
 app.use('/api', limiter)
 
+//Stripe webhook - needs to come before json body parser
+app.use('/webhook-checkout', bookingRouter)
+
 //body parser
 app.use(express.json({limit: '10kb'})) //add body to the request object
 
