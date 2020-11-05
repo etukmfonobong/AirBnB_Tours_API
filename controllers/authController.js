@@ -66,6 +66,41 @@ exports.logIn = async (req, res, next) => {
 
 }
 
+exports.removeCookies = async (req, res, next) => {
+  try {
+    const sameSite = process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+
+    const farFuture = new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10)
+    //send two separate cookies with the signature cookie set to http only
+    res.cookie('jwtsig', 'empty', {
+      expires: farFuture,
+      // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+      path: '/',
+      sameSite: sameSite,
+      httpOnly: true
+    })
+
+    res.cookie('jwthandp', 'empty', {
+      expires: farFuture,
+      // expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+      path: '/',
+      sameSite: sameSite,
+    })
+    //if everything is ok send token to client
+    await res.status(200).json({
+      status: 'success',
+      data: {
+        //data
+      }
+    })
+  } catch (e) {
+    //create an error message if an error occurs
+    return next(e)
+  }
+}
+
 //create and split jwt
 exports.secureToken = async (req, res, next) => {
   try {

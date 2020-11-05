@@ -7,6 +7,7 @@ const authController = require('./../controllers/authController') //auth control
 
 router.post('/signup', authController.signUp, authController.secureToken)
 router.post('/login', authController.logIn, authController.secureToken)
+router.get('/logout', authController.removeCookies)
 
 router.get(
   '/get-me',
