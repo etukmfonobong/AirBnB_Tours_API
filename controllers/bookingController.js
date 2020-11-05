@@ -41,6 +41,15 @@ exports.getCheckoutSession = async (req, res, next) => {
   }
 }
 
+exports.test = async (req, res, next) => {
+  try {
+    console.log('got to test middleware')
+    next()
+  } catch (e) {
+    //create an error message if an error occurs
+    return next(e)
+  }
+}
 
 const createBooking = async (session) => {
   const tour = session.client_reference_id
@@ -51,6 +60,7 @@ const createBooking = async (session) => {
 }
 
 exports.createBookingFromWebhook = async (req, res, next) => {
+  console.log('got to hook function')
   try {
     //get webhook signature
     const signature = req.headers['stripe-signature']
