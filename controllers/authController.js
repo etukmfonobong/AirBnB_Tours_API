@@ -27,7 +27,7 @@ exports.signUp = async (req, res, next) => {
     req.newUser = newUser
 
     //send welcome email
-    const url = `${req.protocol}://${req.get('host')}/settings/account-settings`
+    const url = `${req.get('origin')}/settings/account-settings`
     await new Email(newUser, url).sendWelcome()
     next()
 
@@ -243,7 +243,7 @@ exports.forgotPassword = async (req, res, next) => {
     await user.save({validateBeforeSave: false})//save changes made in the createPasswordResetToken method
 
     //if everything is ok send password reset link to email
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/reset-password/${resetToken}`
+    const resetURL = `${req.get('origin')}/api/v1/users/reset-password/${resetToken}`
 
     try {
       //try to send email
