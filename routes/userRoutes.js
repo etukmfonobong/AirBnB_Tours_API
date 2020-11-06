@@ -27,7 +27,7 @@ router.patch(
 router.delete('/delete-me', authController.protect, userController.deleteMe)
 
 router.post('/forgot-password', authController.forgotPassword)
-router.patch('/reset-password/:token', authController.resetPassword)
+router.patch('/reset-password/:token', authController.resetPassword, authController.secureToken)
 router.patch('/update-password',
   authController.createBearerToken,
   authController.protect,

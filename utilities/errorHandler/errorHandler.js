@@ -69,6 +69,11 @@ const errorHandler = (err, req, res, next) => {
       error = err
     }
 
+    //handle resource not found 400
+    if (err.statusCode === 400) {
+      error = err
+    }
+
     sendProductionError(error, res)
   }
 

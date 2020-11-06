@@ -243,7 +243,7 @@ exports.forgotPassword = async (req, res, next) => {
     await user.save({validateBeforeSave: false})//save changes made in the createPasswordResetToken method
 
     //if everything is ok send password reset link to email
-    const resetURL = `${req.get('origin')}/api/v1/users/reset-password/${resetToken}`
+    const resetURL = `${req.get('origin')}/reset-password/${resetToken}`
 
     try {
       //try to send email
@@ -299,20 +299,8 @@ exports.resetPassword = async (req, res, next) => {
     }
 
     //if everything is ok re-log user in
-    const token = await createToken(user._id)
-
-    res.cookie('jwt', token, {
-      expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-      // secure: true,
-      httpOnly: true
-    })
-
-    await res.status(200).json({
-      status: 'success',
-      data: {
-        token
-      }
-    })
+    req.token = await createToken(user._id)
+    next()
   } catch (e) {
     //create an error message if an error occurs
     return next(e)
