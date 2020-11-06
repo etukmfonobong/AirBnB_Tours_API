@@ -7,7 +7,6 @@ exports.populateFields = () => {
       path: 'user'
     }).populate({
       path: 'tour',
-      select: 'name'
     })
     next()
   })
