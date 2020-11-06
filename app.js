@@ -9,7 +9,6 @@ const hpp = require('hpp')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
-const bodyParser = require('body-parser')
 
 
 const tourRouter = require('./routes/tourRoutes') //tour router import
@@ -54,7 +53,6 @@ app.use('/api', limiter)
 
 //Stripe webhook - needs to come before json body parser
 app.post('/webhook-checkout/create-booking',
-  bookingController.test,
   express.raw({type: 'application/json'}),
   bookingController.createBookingFromWebhook
 )
