@@ -7,7 +7,7 @@ const bookingController = require('./../controllers/bookingController') //bookin
 
 router
   .route('/')
-  .get(authController.protect, bookingController.allowNestedRoutes, bookingController.getAllBookings)
+  .get(authController.createBearerToken, authController.protect, bookingController.allowNestedRoutes, bookingController.getAllBookings)
 
 router
   .route('/checkout-session/:tourId')
