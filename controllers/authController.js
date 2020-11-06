@@ -163,7 +163,7 @@ exports.secureToken = async (req, res, next) => {
   }
 }
 
-//create bearer token from incomming cookies
+//create bearer token from incoming cookies
 exports.createBearerToken = (req, res, next) => {
   const rawCookies = req.headers.cookie.split('; ')
 
