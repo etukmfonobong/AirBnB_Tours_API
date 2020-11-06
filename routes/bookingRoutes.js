@@ -1,8 +1,13 @@
 const express = require('express')
-const router = express.Router()
+// const router = express.Router()
+const router = express.Router({mergeParams: true})
 const authController = require('./../controllers/authController')
 const bookingController = require('./../controllers/bookingController') //booking controller
 
+
+router
+  .route('/')
+  .get(authController.protect, bookingController.allowNestedRoutes, bookingController.getAllBookings)
 
 router
   .route('/checkout-session/:tourId')

@@ -1,13 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-
+const bookingRouter = require('./bookingRoutes')
 const userController = require('./../controllers/userController') //user controller
 const authController = require('./../controllers/authController') //auth controller
 
 router.post('/signup', authController.signUp, authController.secureToken)
 router.post('/login', authController.logIn, authController.secureToken)
 router.get('/logout', authController.removeCookies)
+
+//nested route
+router.use('/:userId/bookings', bookingRouter)
 
 router.get(
   '/get-me',

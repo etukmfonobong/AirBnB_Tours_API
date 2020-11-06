@@ -1,6 +1,8 @@
 const Tour = require('./../models/tourModel')//tour model import
 const Booking = require('./../models/bookingModel')//booking model import
-const User = require('./../models/userModel')//user model import
+const User = require('./../models/userModel')
+const controllerFactory = require("../controllerFactory");
+//user model import
 // const controllerFactory = require('./../controllerFactory')
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
@@ -68,6 +70,17 @@ exports.createBookingFromWebhook = async (req, res, next) => {
   }
 }
 
+exports.allowNestedRoutes = (req, res, next) => {
+  //this is to allow request for the reviews of a single tour
+  //from route GET tour/:tourId/reviews
+  //if tourId is available
+  let filter = {}
+  if (req.params["userId"]) filter = {user: req.params["userId"]}
+  req.filterForOne = filter
+  next()
+}
 
+//get all bookings
+exports.getAllBookings = controllerFactory.getAll(Booking)
 
 
